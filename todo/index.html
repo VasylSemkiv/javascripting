@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta tags
+  ================================================== -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Site title
+  ================================================== -->
+    <title>todo</title>
+    <!-- Fonts
+  ================================================== -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic-ext" rel="stylesheet">
+    <!-- Favicons + Touch Icons
+  ================================================== -->
+    <link rel="icon" href="img/favicons/apple-touch-icon57.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon60.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-touch-icon120.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon180.png">
+    <style>
+      .content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px 15px;
+      }
+      section {
+        margin: 40px 0;
+      }
+      p {
+        background-color: #eee;
+        padding: 5px;
+        cursor: pointer;
+        user-select: none;
+      }
+      p.active {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="content">
+      <input type="text" id="input" class="active" placeholder="add list item">
+
+      <button id="btn_add">add item</button>
+      <button id="btn_remove">remove item(s)</button>
+
+      <section id="todo_items_wrap"></section>
+    </div>
+
+    <script>
+
+
+      // init
+      var input = document.getElementById("input");
+      var btnAdd = document.getElementById("btn_add");
+      var btnRemove = document.getElementById("btn_remove");
+      var parent = document.getElementById("todo_items_wrap");
+      var childNodeArray = parent.children;
+      var childGlobal = document.getElementsByTagName("p");
+      
+
+      // adding
+      btnAdd.onclick = function() {
+
+        input.focus();
+        if (input.value.length > 0) {
+          
+          appendElement();
+          clickChildElement();
+
+        } else {
+          alert('Please, add list name!');
+        }
+
+      }
+
+
+      // removing one element
+      btnRemove.onclick = function() {
+
+        var lastItem = parent.lastElementChild;
+
+        if (lastItem) {
+          parent.removeChild(lastItem);
+        }
+
+        // if (input.classList.contains("active")) {
+        //   alert('1');
+        // } else {
+        //   alert('2');
+        // }
+
+      }
+
+
+      function appendElement() {
+        var child = document.createElement("p");
+        child.innerHTML = input.value;
+        parent.append(child);
+      }
+
+
+      function clickChildElement() {
+        for(var i = 0; i < childNodeArray.length; i++){
+          childNodeArray[i].onclick = function () {
+            this.classList.toggle("active");
+          };
+        }
+      }
+
+
+    </script>
+
+  </body>
+</html>
