@@ -44,77 +44,13 @@
   <body>
 
     <div class="content">
-      <input type="text" id="input" class="active" placeholder="add list item">
+      <input type="text" id="input" placeholder="add list item">
 
       <button id="btn_add">add item</button>
-      <button id="btn_remove">remove item(s)</button>
+      <button id="btn_remove">remove checked items</button>
 
       <section id="todo_items_wrap"></section>
     </div>
-
-    <script>
-
-
-      // init
-      var input = document.getElementById("input");
-      var btnAdd = document.getElementById("btn_add");
-      var btnRemove = document.getElementById("btn_remove");
-      var parent = document.getElementById("todo_items_wrap");
-      var childNodeArray = parent.children;
-      var childGlobal = document.getElementsByTagName("p");
-      
-
-      // adding
-      btnAdd.onclick = function() {
-
-        input.focus();
-        if (input.value.length > 0) {
-          
-          appendElement();
-          clickChildElement();
-
-        } else {
-          alert('Please, add list name!');
-        }
-
-      }
-
-
-      // removing one element
-      btnRemove.onclick = function() {
-
-        var lastItem = parent.lastElementChild;
-
-        if (lastItem) {
-          parent.removeChild(lastItem);
-        }
-
-        // if (input.classList.contains("active")) {
-        //   alert('1');
-        // } else {
-        //   alert('2');
-        // }
-
-      }
-
-
-      function appendElement() {
-        var child = document.createElement("p");
-        child.innerHTML = input.value;
-        parent.append(child);
-      }
-
-
-      function clickChildElement() {
-        for(var i = 0; i < childNodeArray.length; i++){
-          childNodeArray[i].onclick = function () {
-            this.classList.toggle("active");
-          };
-        }
-      }
-
-
-    </script>
-
+    <script src="todo.js"></script>
   </body>
 </html>
